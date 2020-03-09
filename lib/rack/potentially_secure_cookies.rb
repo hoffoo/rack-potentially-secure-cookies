@@ -21,9 +21,9 @@ module Rack
         request = Rack::Request.new(env)
 
         if request.ssl?
-          headers['Set-Cookie'].gsub!(@cookies_without_secure, '\1; Secure')
+          headers['Set-Cookie'] = headers['Set-Cookie'].gsub(@cookies_without_secure, '\1; Secure')
         else
-          headers['Set-Cookie'].gsub!(@cookies_with_secure, '\1\3')
+          headers['Set-Cookie'] = headers['Set-Cookie'].gsub(@cookies_with_secure, '\1\3')
         end
       end
 
